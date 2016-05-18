@@ -1,3 +1,4 @@
+-- -*- mode: haskell; -*-
 module Main where
 
 ackerman :: Int -> Int -> Int -> Int
