@@ -95,7 +95,7 @@ naturals = [1..]
 -- this list is created by squaring each element of the list returned
 -- by 'naturals' and is therefore also an infinite list
 squares :: [Int]
-squares = map squared naturals
+squares = myMap squared naturals
 
 -- 'intSum' is a function taking a list of Ints and returning an Int
 --
@@ -115,9 +115,21 @@ intSum = foldr (+) 0
 intProduct :: [Int] -> Int
 intProduct = foldr (*) 1
 
--- TODO - WRITE THIS YOURSELF!?!
+-- 'myMap' is a function taking;
+-- - a function from type a to type b
+-- - a list of type a
+-- and returns a list of type b
+--
+-- Here we use pattern-matching to match a type constructor (list) and
+-- name the arguments it took when created, giving those parts names we
+-- can refer to in our function.
+--
+-- Since we don't have any way of looping we use recursion to construct a new list
+-- populated with the elements of the input list mapped over our function
+--
 myMap :: (a -> b) -> [a] -> [b]
-myMap = undefined
+myMap _ [] = []
+myMap f (x:xs) = f x : myMap f xs
 
 listsMain :: IO ()
 listsMain = do
@@ -136,11 +148,18 @@ listsMain = do
   print "product of 10 squares"
   print $ intProduct $ take 10 squares
 
+
+-- 'first' is a function taking a tuple of arity 2 and returning a value
+-- of the type of the first element of the tuple.
+--
+-- Here we use pattern-matching to match a type constructor (tuple) and
+-- name the arguments it took when created, giving those parts names we
+-- can refer to in our function.
 first :: (a,b) -> a
-first = undefined
+first (x,_) = x
 
 second :: (a,b) -> b
-second = undefined
+second (_,x) = x
 
 tuplesMain :: IO ()
 tuplesMain = do
@@ -152,25 +171,6 @@ tuplesMain = do
   print "second item"
   print (second t)
 
-multiplyMaybeInt :: Maybe Int -> Int -> Maybe Int
-multiplyMaybeInt = undefined
-
-maybeMain :: IO ()
-maybeMain = do
-  let x = 2 :: Int
-      y = 4 :: Int
-      m = Just x
-  print "x"
-  print x
-  print "y"
-  print y
-  print "m"
-  print m
-  print "x * y"
-  print (x * y)
-  print "maybe x * y"
-  print (multiplyMaybeInt m y)
-
 main :: IO ()
 main = do
   print "main"
@@ -181,4 +181,3 @@ main = do
   composeMain
   listsMain
   tuplesMain
-  maybeMain
