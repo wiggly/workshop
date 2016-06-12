@@ -9,7 +9,7 @@ module Data.Money
          , exchange
        ) where
 
--- algebraic data type - sum type
+-- algebraic data type - sum type, four possible values
 data Currency =
   GBP
   | EUR
@@ -17,21 +17,23 @@ data Currency =
   | XTS
   deriving (Eq)
 
-data Money a =
-  Money Currency a
-
+-- instance of the typeclass 'Show' - simple (but not the best)
+-- way of generating a string representation of a type's values
 instance Show Currency where
   show GBP = "£"
   show EUR = "€"
   show USD = "$"
-  show XTS = "M"
+  show XTS = "T"
 
+-- generic money type over some type 'a' to be used to denote the amount
+data Money a =
+  Money Currency a
+
+-- as above but for money
 instance Show a => Show (Money a) where
   show (Money c n) = (show c) ++ (show n)
 
--- TODO: let's define this
--- instance Context Money where
-
+-- algebraic data type - product type
 data ExchangeRate = ExchangeRate Currency Currency Float
 
 rateFrom :: ExchangeRate -> Currency
