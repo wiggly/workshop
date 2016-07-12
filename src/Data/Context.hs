@@ -1,3 +1,4 @@
+-- -*- mode: haskell; -*-
 module Data.Context
        (
          Context(..)

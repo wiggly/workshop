@@ -3,7 +3,7 @@ module Main where
 
 import Data.Money
 
--- TODO: how can we make head safe...
+-- TODO: is it possible to make head safe...
 safeHead :: [a] -> a
 safeHead = undefined
 
