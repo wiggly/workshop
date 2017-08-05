@@ -27,6 +27,17 @@ executable workshop
                      , workshop
   default-language:    Haskell2010
 
+executable addressbook
+  hs-source-dirs:      app
+  main-is:             AddressBook.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , workshop
+                     , csv
+                     , time
+                     , parsec
+  default-language:    Haskell2010
+
 executable anagram
   hs-source-dirs:      app
   main-is:             Anagram.hs
